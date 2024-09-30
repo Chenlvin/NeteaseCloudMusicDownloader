@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class Loader extends DefaultListCellRenderer {
     public static void LoadFont() throws IOException, FontFormatException {
@@ -16,7 +17,7 @@ public class Loader extends DefaultListCellRenderer {
 
     public static String LoadAnnouncement() throws IOException {
         URL url = new URL("https://docs.chenlvin.cc/infor/music-downloader/announcement.txt");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)); // 指定UTF-8编码
         StringBuilder content = new StringBuilder();
         String line;
 

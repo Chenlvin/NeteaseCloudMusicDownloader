@@ -34,7 +34,7 @@ public class MusicDownloader extends JFrame {
 
         // 搜索按钮
         searchButton = new JButton("搜索");
-        searchButton.setBounds(450, 30, 100, 30);
+        searchButton.setBounds(450, 30, 100, 30); // 设置位置和大小
         searchButton.setFont(new Font("微软雅黑", Font.BOLD, 16));
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -69,7 +69,7 @@ public class MusicDownloader extends JFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    FileDownloader.downloadFile(downloadUrl, selectedSong.getName() + ".mp3");
+                    FileDownloader.downloadFile(downloadUrl, Function.sanitizeFileName(selectedSong.getName() + ".mp3"));
                 } else {
                     JOptionPane.showMessageDialog(null, "请选择一首歌曲进行下载");
                 }

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.io.*;
 
@@ -142,6 +143,8 @@ public class Login extends JFrame {
 
     public static void main(String[] args) throws Exception {
         Loader.LoadFont();
+        UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("微软雅黑", Font.BOLD, 15)));
+        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("HarmonyOS Sans SC", Font.TRUETYPE_FONT, 16)));
         new Login();
     }
 }

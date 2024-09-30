@@ -66,7 +66,7 @@ public class FileDownloader {
                     httpConn.disconnect();
                 } catch (IOException ex) {
                     progressDialog.dispose();
-                    JOptionPane.showMessageDialog(null, "下载出错，请尝试重新登录账号");
+                    JOptionPane.showMessageDialog(null, "下载出错: " + ex.getMessage(), null, JOptionPane.ERROR_MESSAGE);
                 }
             }).start();
         } else {
