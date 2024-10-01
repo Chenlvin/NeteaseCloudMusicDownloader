@@ -11,16 +11,6 @@ public class Login extends JFrame {
 
     public Login() throws Exception {
 
-// DEBUG
-//        if(true) {
-//            String[] loginInfo = loadLoginInfo();
-//            String cookie = loginInfo[2];
-//            System.out.println("isLogged: " + ApiClient.checkLoginStatus(cookie));
-//            new MusicDownloader(cookie);
-//            dispose();
-//            return;
-//        }
-
         setTitle("登录网易云音乐账号");
         setResizable(false);
         setSize(500, 280);
@@ -33,6 +23,8 @@ public class Login extends JFrame {
         String cookie = loginInfo[2];
 
         if (cookie != null && ApiClient.checkLoginStatus(cookie)) {
+            System.out.println("LoginStatus_isLogin = " + ApiClient.checkLoginStatus(cookie));
+            System.out.println("Auto Logged. Start MusicDownloader GUI");
             new MusicDownloader(cookie);
             dispose();
             return;
@@ -85,7 +77,12 @@ public class Login extends JFrame {
         loginButton.addActionListener(e -> {
             String phone = phoneField.getText();
             String password = new String(passwordField.getPassword());
-            String newCookie = ApiClient.login(phone, password);
+            String newCookie = null;
+            try {
+                newCookie = ApiClient.login(phone, password);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
             if (newCookie != null) {
                 if (rememberMe.isSelected()) {
                     saveLoginInfo(phone, password, newCookie);
@@ -93,6 +90,7 @@ public class Login extends JFrame {
                     clearLoginInfo();
                 }
                 try {
+                    System.out.println("Successfully logged. Start MusicDownloader GUI");
                     new MusicDownloader(newCookie);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
@@ -102,7 +100,6 @@ public class Login extends JFrame {
                 JOptionPane.showMessageDialog(null, "登录失败，请检查您的手机号和密码。");
             }
         });
-
         setVisible(true);
     }
 
@@ -142,9 +139,14 @@ public class Login extends JFrame {
     }
 
     public static void main(String[] args) throws Exception {
-        Loader.LoadFont();
-        UIManager.put("OptionPane.buttonFont", new FontUIResource(new Font("微软雅黑", Font.BOLD, 15)));
-        UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("HarmonyOS Sans SC", Font.TRUETYPE_FONT, 16)));
-        new Login();
+        Font HMSC = Loader.LoadFont("/font/HarmonyOS_Sans_SC_Regular.ttf",16);
+        UIManager.put("OptionPane.buttonFont", HMSC);
+        UIManager.put("OptionPane.messageFont", HMSC);
+        try {
+            new Login();
+        } catch (Exception e) {
+            System.err.println("发生错误，请检查 ApiClient.java 下的 BASE_URL 填写是否正确.");
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 }

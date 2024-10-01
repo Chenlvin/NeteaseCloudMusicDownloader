@@ -1,10 +1,8 @@
 ## 前言
 
-**NeteaseCloudMusicDownloader**是基于网易云音乐API的音乐下载工具
+**NeteaseCloudMusicDownloader**是基于 [网易云音乐API](https://gitlab.com/Binaryify/neteasecloudmusicapi) 的音乐下载工具
 
 该工具只是一个简单的程序。
-
-➡️ 网易云音乐API：[https://gitlab.com/Binaryify/neteasecloudmusicapi](https://gitlab.com/Binaryify/neteasecloudmusicapi)
 
 ## 如何使用
 
@@ -17,10 +15,9 @@
 ## 说明
 
 在Release里下载的程序已经包含了API地址，可以直接运行和使用。
-如果你想使用源代码自行编译，你需要自行搭建[NeteaseCloudMusicApi](https://gitlab.com/Binaryify/neteasecloudmusicapi)，并将**/src/main/java/ApiClient.java**中的**BASE_URL**设定为你自己的API地址（url末尾一定要有“/”，比如 http://api.abc.com/ （支持 数字:端口）
+如果你想使用源代码自行编译，你需要自行搭建[NeteaseCloudMusicApi](https://gitlab.com/Binaryify/neteasecloudmusicapi)，并将`/src/main/java/ApiClient.java`中的`BASE_URL`设定为你自己的API地址（url末尾一定要有“/”，比如 http://api.abc.com/ （支持 数字:端口）
 
 ## 已知问题
 
 - [ ] 返回的歌曲列表无法正常显示部分语言文字，可能会显示为空白或乱码。
-- [x] ~~部分歌曲下载报错。~~ (V.0.2.0 Fixed)
 
